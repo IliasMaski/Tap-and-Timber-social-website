@@ -541,6 +541,10 @@
             margin: 1rem 0;
             color: var(--primary);
             font-weight: bold;
+        }.hours-info p1 {
+            margin: 1rem 0;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         /* Contact Section */
