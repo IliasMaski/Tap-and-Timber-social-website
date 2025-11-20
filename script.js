@@ -67,3 +67,102 @@ document.querySelectorAll('section').forEach(section => {
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(section);
 });
+// Store reservations in memory
+const reservations = [];
+
+// Set minimum date to today
+const dateInput = document.getElementById('res-date');
+if (dateInput) {
+    dateInput.min = new Date().toISOString().split('T')[0];
+}
+
+// Form submission handler
+const reservationForm = document.getElementById('reservationForm');
+if (reservationForm) {
+    reservationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Create reservation object
+        const reservation = {
+            id: Date.now(),
+            name: document.getElementById('res-name').value,
+            email: document.getElementById('res-email').value,
+            phone: document.getElementById('res-phone').value,
+            date: document.getElementById('res-date').value,
+            time: document.getElementById('res-time').value,
+            guests: document.getElementById('res-guests').value,
+            notes: document.getElementById('res-notes').value
+        };
+        
+        // Add to reservations array
+        reservations.push(reservation);
+        
+        // Show success message
+        const successMsg = document.getElementById('reservation-success');
+        successMsg.classList.add('show');
+        
+        // Reset form
+        this.reset();
+        
+        // Hide success message after 4 seconds
+        setTimeout(() => {
+            successMsg.classList.remove('show');
+        }, 4000);
+        
+        // Update reservations list
+        displayReservations();
+        
+        // Scroll to reservations list
+        document.getElementById('reservations-list').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+        });
+    });
+}
+
+// Display all reservations
+function displayReservations() {
+    const container = document.getElementById('reservations-list');
+    
+    // Show empty state if no reservations
+    if (reservations.length === 0) {
+        container.innerHTML = '<div class="empty-reservations">No upcoming reservations</div>';
+        return;
+    }
+    
+    // Generate HTML for each reservation
+    container.innerHTML = reservations.map(res => {
+        const resDate = new Date(res.date);
+        const formattedDate = resDate.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        
+        return `
+            <div class="reservation-item">
+                <h4>${res.name}</h4>
+                <p><strong>Date:</strong> ${formattedDate}</p>
+                <p><strong>Time:</strong> ${res.time}</p>
+                <p><strong>Party Size:</strong> ${res.guests} ${res.guests === '1' ? 'guest' : 'guests'}</p>
+                <p><strong>Phone:</strong> ${res.phone}</p>
+                <p><strong>Email:</strong> ${res.email}</p>
+                ${res.notes ? `<p><strong>Special Requests:</strong> ${res.notes}</p>` : ''}
+                <button class="delete-btn" onclick="deleteReservation(${res.id})">Cancel Reservation</button>
+            </div>
+        `;
+    }).join('');
+}
+
+// Delete a reservation
+function deleteReservation(id) {
+    const index = reservations.findIndex(res => res.id === id);
+    if (index > -1) {
+        reservations.splice(index, 1);
+        displayReservations();
+    }
+}
+
+// Initialize - display empty state on page load
+displayReservations();
