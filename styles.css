@@ -323,9 +323,203 @@
         }
         .priceA {
             color: var(--accent);
-            text-align: right;
             font-weight: bold;
         }
+        /* Reservqtion section*/
+        #reservations {
+    background: var(--white);
+}
+
+.reservation-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reservation-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--light);
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+}
+
+.reservation-intro p {
+    font-size: 1.1rem;
+    color: var(--dark);
+    line-height: 1.8;
+}
+
+.reservation-form-container {
+    background: var(--light);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 3rem;
+}
+
+.reservation-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.reservation-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.reservation-form label {
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background: var(--white);
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.reservation-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.reservation-form .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.reservation-form .submit-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+}
+
+.reservation-success {
+    display: none;
+    background: #10b981;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+    animation: slideDown 0.3s ease;
+}
+
+.reservation-success.show {
+    display: block;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reservations-list-section {
+    margin-top: 3rem;
+}
+
+.reservations-list-section h3 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+#reservations-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.reservation-item {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--accent);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.reservation-item h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.reservation-item p {
+    margin: 0.3rem 0;
+    color: var(--dark);
+}
+
+.reservation-item strong {
+    color: var(--secondary);
+}
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+.empty-reservations {
+    text-align: center;
+    padding: 2rem;
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .reservation-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .reservation-form-container {
+        padding: 1.5rem;
+    }
+}
 
         /* Hours Section */
         #hours {
@@ -335,7 +529,7 @@
         .hours-info {
             text-align: center;
             font-size: 1.3rem;
-            background: var(--white);
+            background: var(--light);
             padding: 3rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
